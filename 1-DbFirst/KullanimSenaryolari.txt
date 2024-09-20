@@ -1,0 +1,9 @@
+﻿ 1- dotnet ef  dbcontext scaffold 
+	 "server=.;Database=Northwind;Trusted_Connection=true;TrustServerCertificate=true"  //Connection String
+	 Microsoft.EntityFrameWorkCore.SqlServer //Paket Ismi
+	 -o NorthwinSiparisler  // Hangi Klasore cikti verecegi
+	 -t Categories -t Products -t Customers -t Employees -t Orders -t Shippers  // Optioanl , istenirse eger tek tek tablo isimleri verilebilir 
+	 -f // --fource => daha once var olan bir dosya varsa uzerine yazmaya zorlar.
+	 -c NorthwindSiparis // olusacak context ismi 
+
+2- dotnet ef dbcontext  script --context sakilacontext -o sakilaScript.sql  // Mevcut bir context'in sql script'ini cikartir.
