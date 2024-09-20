@@ -1,6 +1,5 @@
-﻿
-
-using _1_DbFirst.Entities;
+﻿using _1_DbFirst.Entities;
+using _1_DbFirst.NorthwinSiparisler;
 
 namespace _1_DbFirst
 {
@@ -29,25 +28,26 @@ namespace _1_DbFirst
         #endregion
         static void Main(string[] args)
         {
-            Shipper shipper = new Shipper()
+            Entities.Shipper shipper = new Entities.Shipper()
             {
                 ShipperId = 11,
-                CompanyName = null,
+                CompanyName =null,
                 Phone = "123123"
             };
             NorthwindContext context = new NorthwindContext();
-
+            //NorthwindSiparis siparisContext = new NorthwindSiparis();
+            
             // context.Customers.Where(p => p.Country == "UK").ToList().ForEach(p => Console.WriteLine(p.CompanyName + " " + p.Country));
-
+            
             //Update
             //var shipper11 = context.Find<Shipper>(11);
             //shipper11.CompanyName = "Deneme";
             //context.Shippers.Update(shipper11);
             //Insert
             //context.Shippers.Add(shipper);
-
+            
             context.Shippers.Update(shipper);
-
+          
             context.SaveChanges();
             Console.WriteLine("Hello, World!");
         }

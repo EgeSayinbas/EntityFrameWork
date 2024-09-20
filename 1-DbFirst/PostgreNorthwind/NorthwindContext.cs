@@ -23,6 +23,10 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<Employee> Employees { get; set; }
 
+    public virtual DbSet<Kisi> Kisis { get; set; }
+
+    public virtual DbSet<Musterisiparisleri> Musterisiparisleris { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
@@ -43,12 +47,20 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<Yedekmusteriler> Yedekmusterilers { get; set; }
 
+    public virtual DbSet<Yedekorder> Yedekorders { get; set; }
+
+    public virtual DbSet<Yedekurunler> Yedekurunlers { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("server=127.0.0.1;Database=Northwind;User Id=postgres;password=qweasd");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder
+            .HasPostgresEnum("cinsiyet", new[] { "Kadin", "Erkek" })
+            .HasPostgresEnum("egitimdurumu", new[] { "Ilk Okul", "Orta Okul", "Lise", "Lisans", "Yuksek Lisans", "Doktora", "Prof" });
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.CategoryId).HasName("pk_categories");
@@ -218,6 +230,44 @@ public partial class NorthwindContext : DbContext
                     });
         });
 
+        modelBuilder.Entity<Kisi>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("kisi_pkey");
+
+            entity.ToTable("kisi");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Ad)
+                .HasMaxLength(50)
+                .HasColumnName("ad");
+            entity.Property(e => e.Soyad)
+                .HasMaxLength(50)
+                .HasColumnName("soyad");
+        });
+
+        modelBuilder.Entity<Musterisiparisleri>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("musterisiparisleri");
+
+            entity.Property(e => e.Calisan).HasColumnName("calisan");
+            entity.Property(e => e.Kargo)
+                .HasMaxLength(40)
+                .HasColumnName("kargo");
+            entity.Property(e => e.Musteri)
+                .HasMaxLength(40)
+                .HasColumnName("musteri");
+            entity.Property(e => e.Sehir)
+                .HasMaxLength(15)
+                .HasColumnName("sehir");
+            entity.Property(e => e.Siparisno).HasColumnName("siparisno");
+            entity.Property(e => e.Siparistarihi).HasColumnName("siparistarihi");
+            entity.Property(e => e.Ulke)
+                .HasMaxLength(15)
+                .HasColumnName("ulke");
+        });
+
         modelBuilder.Entity<Order>(entity =>
         {
             entity.HasKey(e => e.OrderId).HasName("pk_orders");
@@ -298,7 +348,7 @@ public partial class NorthwindContext : DbContext
             entity.ToTable("products");
 
             entity.Property(e => e.ProductId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('product_seq'::regclass)")
                 .HasColumnName("product_id");
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.Discontinued).HasColumnName("discontinued");
@@ -327,13 +377,14 @@ public partial class NorthwindContext : DbContext
         {
             entity.HasKey(e => e.RegionId).HasName("pk_region");
 
-            entity.ToTable("region");
+            entity.ToTable("regions");
 
             entity.Property(e => e.RegionId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('region_seq'::regclass)")
                 .HasColumnName("region_id");
             entity.Property(e => e.RegionDescription)
                 .HasMaxLength(60)
+                .HasDefaultValueSql("' '::character varying")
                 .HasColumnName("region_description");
         });
 
@@ -344,7 +395,7 @@ public partial class NorthwindContext : DbContext
             entity.ToTable("shippers");
 
             entity.Property(e => e.ShipperId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('shippers_shipper_id2_seq'::regclass)")
                 .HasColumnName("shipper_id");
             entity.Property(e => e.CompanyName)
                 .HasMaxLength(40)
@@ -352,6 +403,9 @@ public partial class NorthwindContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(24)
                 .HasColumnName("phone");
+            entity.Property(e => e.ShipperId2)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("shipper_id2");
         });
 
         modelBuilder.Entity<Supplier>(entity =>
@@ -493,6 +547,66 @@ public partial class NorthwindContext : DbContext
                 .HasMaxLength(15)
                 .HasColumnName("region");
         });
+
+        modelBuilder.Entity<Yedekorder>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("yedekorder");
+
+            entity.Property(e => e.CustomerId)
+                .HasMaxLength(5)
+                .HasColumnName("customer_id");
+            entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+            entity.Property(e => e.Freight).HasColumnName("freight");
+            entity.Property(e => e.OrderDate).HasColumnName("order_date");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.RequiredDate).HasColumnName("required_date");
+            entity.Property(e => e.ShipAddress)
+                .HasMaxLength(60)
+                .HasColumnName("ship_address");
+            entity.Property(e => e.ShipCity)
+                .HasMaxLength(15)
+                .HasColumnName("ship_city");
+            entity.Property(e => e.ShipCountry)
+                .HasMaxLength(15)
+                .HasColumnName("ship_country");
+            entity.Property(e => e.ShipName)
+                .HasMaxLength(40)
+                .HasColumnName("ship_name");
+            entity.Property(e => e.ShipPostalCode)
+                .HasMaxLength(10)
+                .HasColumnName("ship_postal_code");
+            entity.Property(e => e.ShipRegion)
+                .HasMaxLength(15)
+                .HasColumnName("ship_region");
+            entity.Property(e => e.ShipVia).HasColumnName("ship_via");
+            entity.Property(e => e.ShippedDate).HasColumnName("shipped_date");
+        });
+
+        modelBuilder.Entity<Yedekurunler>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("yedekurunler");
+
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
+            entity.Property(e => e.Discontinued).HasColumnName("discontinued");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.ProductName)
+                .HasMaxLength(40)
+                .HasColumnName("product_name");
+            entity.Property(e => e.QuantityPerUnit)
+                .HasMaxLength(20)
+                .HasColumnName("quantity_per_unit");
+            entity.Property(e => e.ReorderLevel).HasColumnName("reorder_level");
+            entity.Property(e => e.SupplierId).HasColumnName("supplier_id");
+            entity.Property(e => e.UnitPrice).HasColumnName("unit_price");
+            entity.Property(e => e.UnitsInStock).HasColumnName("units_in_stock");
+            entity.Property(e => e.UnitsOnOrder).HasColumnName("units_on_order");
+        });
+        modelBuilder.HasSequence("product_seq").StartsAt(100L);
+        modelBuilder.HasSequence("region_seq").StartsAt(100L);
 
         OnModelCreatingPartial(modelBuilder);
     }

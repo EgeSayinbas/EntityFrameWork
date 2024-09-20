@@ -31,9 +31,13 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<Employee> Employees { get; set; }
 
+    public virtual DbSet<Guidtable> Guidtables { get; set; }
+
     public virtual DbSet<Invoice> Invoices { get; set; }
 
     public virtual DbSet<Menuler> Menulers { get; set; }
+
+    public virtual DbSet<MusteriView> MusteriViews { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
@@ -69,13 +73,17 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
 
-    public virtual DbSet<Table1deneme> Table1denemes { get; set; }
-
     public virtual DbSet<Territory> Territories { get; set; }
+
+    public virtual DbSet<Test> Tests { get; set; }
 
     public virtual DbSet<UrunlerListesi> UrunlerListesis { get; set; }
 
     public virtual DbSet<YedekMusteriler> YedekMusterilers { get; set; }
+
+    public virtual DbSet<YedekOrder> YedekOrders { get; set; }
+
+    public virtual DbSet<YedekProduct> YedekProducts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -83,6 +91,8 @@ public partial class NorthwindContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
         modelBuilder.Entity<AlphabeticalListOfProduct>(entity =>
         {
             entity
@@ -256,6 +266,19 @@ public partial class NorthwindContext : DbContext
                     });
         });
 
+        modelBuilder.Entity<Guidtable>(entity =>
+        {
+            entity.ToTable("GUIDTable");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Ad)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Soyad)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Invoice>(entity =>
         {
             entity
@@ -301,7 +324,22 @@ public partial class NorthwindContext : DbContext
 
             entity.HasOne(d => d.UstMenu).WithMany(p => p.InverseUstMenu)
                 .HasForeignKey(d => d.UstMenuId)
-                .HasConstraintName("FK_Menuler_Menuler1");
+                .HasConstraintName("FK_Menuler_Menuler");
+        });
+
+        modelBuilder.Entity<MusteriView>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("MusteriView");
+
+            entity.Property(e => e.Ciro)
+                .HasColumnType("money")
+                .HasColumnName("ciro");
+            entity.Property(e => e.CustomerId)
+                .HasMaxLength(5)
+                .IsFixedLength()
+                .HasColumnName("CustomerID");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -314,7 +352,7 @@ public partial class NorthwindContext : DbContext
 
             entity.HasIndex(e => e.EmployeeId, "EmployeesOrders");
 
-            entity.HasIndex(e => e.RequiredDate, "IX_Orders_ReuqiredDate");
+            entity.HasIndex(e => e.RequiredDate, "IX_Orders_RequiredDate");
 
             entity.HasIndex(e => e.OrderDate, "OrderDate");
 
@@ -606,37 +644,6 @@ public partial class NorthwindContext : DbContext
             entity.Property(e => e.Region).HasMaxLength(15);
         });
 
-        modelBuilder.Entity<Table1deneme>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("Table_1deneme");
-
-            entity.Property(e => e.Ad)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("ad");
-            entity.Property(e => e.Guid).HasColumnName("guid");
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.Sehir)
-                .HasMaxLength(50)
-                .HasColumnName("sehir");
-            entity.Property(e => e.Soyad)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("soyad");
-            entity.Property(e => e.Trh1).HasColumnName("trh1");
-            entity.Property(e => e.Trh2)
-                .HasColumnType("datetime")
-                .HasColumnName("trh2");
-            entity.Property(e => e.Tutar)
-                .HasColumnType("money")
-                .HasColumnName("tutar");
-            entity.Property(e => e.Zaman).HasColumnName("zaman");
-        });
-
         modelBuilder.Entity<Territory>(entity =>
         {
             entity.HasKey(e => e.TerritoryId).IsClustered(false);
@@ -655,15 +662,45 @@ public partial class NorthwindContext : DbContext
                 .HasConstraintName("FK_Territories_Region");
         });
 
+        modelBuilder.Entity<Test>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("Test");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.KelimeNvarchar)
+                .HasMaxLength(50)
+                .HasColumnName("kelimeNVarchar");
+            entity.Property(e => e.Kelimechar)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("kelimechar");
+            entity.Property(e => e.Kelimevarchar)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("kelimevarchar");
+            entity.Property(e => e.Tarih)
+                .HasColumnType("datetime")
+                .HasColumnName("tarih");
+        });
+
         modelBuilder.Entity<UrunlerListesi>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToView("UrunlerListesi");
 
-            entity.Property(e => e.CategoryName).HasMaxLength(15);
-            entity.Property(e => e.CompanyName).HasMaxLength(40);
-            entity.Property(e => e.ProductName).HasMaxLength(40);
+            entity.Property(e => e.Categoryname)
+                .HasMaxLength(15)
+                .HasColumnName("categoryname");
+            entity.Property(e => e.Companyname)
+                .HasMaxLength(40)
+                .HasColumnName("companyname");
+            entity.Property(e => e.Productname)
+                .HasMaxLength(40)
+                .HasColumnName("productname");
         });
 
         modelBuilder.Entity<YedekMusteriler>(entity =>
@@ -686,6 +723,48 @@ public partial class NorthwindContext : DbContext
             entity.Property(e => e.Phone).HasMaxLength(24);
             entity.Property(e => e.PostalCode).HasMaxLength(10);
             entity.Property(e => e.Region).HasMaxLength(15);
+        });
+
+        modelBuilder.Entity<YedekOrder>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("yedekOrder");
+
+            entity.Property(e => e.CustomerId)
+                .HasMaxLength(5)
+                .IsFixedLength()
+                .HasColumnName("CustomerID");
+            entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+            entity.Property(e => e.Freight).HasColumnType("money");
+            entity.Property(e => e.OrderDate).HasColumnType("datetime");
+            entity.Property(e => e.OrderId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("OrderID");
+            entity.Property(e => e.RequiredDate).HasColumnType("datetime");
+            entity.Property(e => e.ShipAddress).HasMaxLength(60);
+            entity.Property(e => e.ShipCity).HasMaxLength(15);
+            entity.Property(e => e.ShipCountry).HasMaxLength(15);
+            entity.Property(e => e.ShipName).HasMaxLength(40);
+            entity.Property(e => e.ShipPostalCode).HasMaxLength(10);
+            entity.Property(e => e.ShipRegion).HasMaxLength(15);
+            entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<YedekProduct>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("yedekProduct");
+
+            entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+            entity.Property(e => e.ProductId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("ProductID");
+            entity.Property(e => e.ProductName).HasMaxLength(40);
+            entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
+            entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+            entity.Property(e => e.UnitPrice).HasColumnType("money");
         });
 
         OnModelCreatingPartial(modelBuilder);
