@@ -49,12 +49,12 @@ namespace _2_ChangeTrackerKavrami
 
             #region Entry Metodu
             //Entity nesnelerinin durumlarını ifade eder.
-            context.Entry(shipper8).State = EntityState.Modified;
+            context.Entry(shipper8).State = EntityState.Modified; // Manuel Mudahale edilmesi durumu
             Console.WriteLine("Shipper 8:"+context.Entry(shipper8).State);
             Console.WriteLine("New Shipper :" + context.Entry(shipper).State);
             Console.WriteLine("Shipper 12 :"+ context.Entry(shipper12).State);
 
-
+            context.SaveChanges();
 
             #endregion
             Console.WriteLine("Hello, World!");

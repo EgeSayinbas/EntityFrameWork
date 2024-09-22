@@ -1,0 +1,8 @@
+﻿1- Migration cikartmak icin kullanilan komut
+ dotnet ef migrations add  initDb  // Burada initDb migrationa verilen isimdir.
+
+2- Database Update icin 
+  dotnet ef  database update 
+
+3- Database silmek icin 
+    dotnet ef  database drop
