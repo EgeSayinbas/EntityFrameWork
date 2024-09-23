@@ -12,8 +12,8 @@ namespace _4_FluentApiKullanimi.Models
     {
         public int UrunID { get; set; }
 
-        public string UrunKodu { get; set; }
-        public string UrunAdi { get; set; }
+        public string? UrunKodu { get; set; }
+        public string? UrunAdi { get; set; }
         
         public double? Fiyat { get; set; } = 0;
         
@@ -22,6 +22,6 @@ namespace _4_FluentApiKullanimi.Models
         public int KategoriId { get; set; }
         ////Navigation property . Database'e yansimaz.
         //// EfCore icerisinde kullanilir.
-        public Kategori Kategori { get; set; }
+        public Kategori? Kategori { get; set; }
     }
 }

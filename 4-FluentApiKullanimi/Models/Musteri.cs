@@ -11,7 +11,7 @@ namespace _4_FluentApiKullanimi.Models
     {
         public int Id { get; set; }
         [MaxLength(50)]
-        public string MusteriAdi { get; set; }
+        public string? MusteriAdi { get; set; }
         [MaxLength(50)]
         public string? VergiNo { get; set; }
         [MaxLength(50)]

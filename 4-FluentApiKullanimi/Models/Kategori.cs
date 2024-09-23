@@ -15,7 +15,7 @@ namespace _4_FluentApiKullanimi.Models
     {
         public int Id { get; set; }
       
-        public string KategoriAdi { get; set; }
+        public string? KategoriAdi { get; set; }
      
         public string? Aciklama { get; set; } //Aciklama Alanin nullable olacak ve max 1000 karakater alacak
         //Nabigation Peoperty. Database'e yansimaz.

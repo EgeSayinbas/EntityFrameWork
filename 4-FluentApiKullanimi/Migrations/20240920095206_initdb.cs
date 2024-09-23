@@ -5,7 +5,7 @@
 namespace _4_FluentApiKullanimi.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class Initdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
