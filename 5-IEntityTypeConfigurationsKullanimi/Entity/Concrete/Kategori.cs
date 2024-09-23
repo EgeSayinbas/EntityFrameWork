@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_IEntityTypeConfigurationsKullanimi.Entity.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,9 +12,9 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Entity.Concrete
     #region DataAnnotations kullanarak property'leri sekillendirmek
 
     #endregion
-    public  class Kategori
+    public  class Kategori:BaseEntity
     {
-        public int Id { get; set; }
+        
       
         public string? KategoriAdi { get; set; }
      

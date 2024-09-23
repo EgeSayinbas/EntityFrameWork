@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_IEntityTypeConfigurationsKullanimi.Entity.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace _5_IEntityTypeConfigurationsKullanimi.Entity.Concrete
 {
-    public class Urun
+    public class Urun:BaseEntity
     {
-        public int UrunID { get; set; }
-
+       
         public string? UrunKodu { get; set; }
         public string? UrunAdi { get; set; }
         

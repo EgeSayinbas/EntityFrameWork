@@ -5,15 +5,17 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1-DbFirst", "1-DbFirst\1-DbFirst.csproj", "{4A9169C7-43A5-47E1-892A-5362F72D7174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2-ChangeTrackerKavrami", "2-ChangeTrackerKavrami\2-ChangeTrackerKavrami.csproj", "{727DA1E0-8A4A-4A70-8FDF-4AA403860F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2-ChangeTrackerKavrami", "2-ChangeTrackerKavrami\2-ChangeTrackerKavrami.csproj", "{727DA1E0-8A4A-4A70-8FDF-4AA403860F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindEntities", "NorthwindEntities\NorthwindEntities.csproj", "{2A6A78D6-2DE4-458B-A266-6D2A3D0431AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindEntities", "NorthwindEntities\NorthwindEntities.csproj", "{2A6A78D6-2DE4-458B-A266-6D2A3D0431AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-CodeFirstMarket", "3-CodeFirstMarket\3-CodeFirstMarket.csproj", "{66899468-EF95-4F29-99A0-FB4C293A3C61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-CodeFirstMarket", "3-CodeFirstMarket\3-CodeFirstMarket.csproj", "{66899468-EF95-4F29-99A0-FB4C293A3C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-FluentApiKullanimi", "4-FluentApiKullanimi\4-FluentApiKullanimi.csproj", "{2D6FD84C-614F-43D3-AA11-27255DA758E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-FluentApiKullanimi", "4-FluentApiKullanimi\4-FluentApiKullanimi.csproj", "{2D6FD84C-614F-43D3-AA11-27255DA758E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-IEntityTypeConfigurationsKullanimi", "5-IEntityTypeConfigurationsKullanimi\5-IEntityTypeConfigurationsKullanimi.csproj", "{E76FF7D7-0699-4A96-8098-C21BB098A962}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-IEntityTypeConfigurationsKullanimi", "5-IEntityTypeConfigurationsKullanimi\5-IEntityTypeConfigurationsKullanimi.csproj", "{E76FF7D7-0699-4A96-8098-C21BB098A962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-ManyToMany", "6-ManyToMany\6-ManyToMany.csproj", "{DD8CBA0F-BBEB-4BE3-9722-0F903AB3DD5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E76FF7D7-0699-4A96-8098-C21BB098A962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E76FF7D7-0699-4A96-8098-C21BB098A962}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E76FF7D7-0699-4A96-8098-C21BB098A962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD8CBA0F-BBEB-4BE3-9722-0F903AB3DD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD8CBA0F-BBEB-4BE3-9722-0F903AB3DD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD8CBA0F-BBEB-4BE3-9722-0F903AB3DD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD8CBA0F-BBEB-4BE3-9722-0F903AB3DD5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
