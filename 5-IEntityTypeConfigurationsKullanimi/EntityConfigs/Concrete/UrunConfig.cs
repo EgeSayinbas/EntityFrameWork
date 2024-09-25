@@ -1,4 +1,4 @@
-﻿using _5_IEntityTypeConfigurationsKullanimi.Entity.Concrete;
+﻿using _5_IEntityTypeConfigurationsKullanimi.Entities.Concrete;
 using _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Abstract;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,10 +13,12 @@ namespace _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Concrete
     {
         public override void Configure(EntityTypeBuilder<Urun> builder)
         {
-            base.Configure(builder);//bu kodu s,lmeyini.base dek, abstract class configure edilecek
+            base.Configure(builder); // Bu kodu silmeyin. Cunku base deki abstract class configure edilecek
             builder.Property(p => p.UrunKodu).HasMaxLength(50);
             builder.Property(p => p.UrunAdi).HasMaxLength(100);
             builder.HasIndex(p => p.UrunKodu).IsUnique();
+
+
         }
     }
 }

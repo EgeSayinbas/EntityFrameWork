@@ -1,4 +1,4 @@
-﻿using _5_IEntityTypeConfigurationsKullanimi.Entity.Concrete;
+﻿using _5_IEntityTypeConfigurationsKullanimi.Entities.Concrete;
 using _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Abstract;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -18,12 +18,14 @@ namespace _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Concrete
             builder.Property(p => p.Password).HasMaxLength(500);
             builder.Property(p => p.Gsm).HasMaxLength(15);
             builder.Property(p => p.Email).HasMaxLength(50);
-
+            
             builder.HasIndex(p => p.UserName).IsUnique();
             builder.HasIndex(p => p.Email).IsUnique();
             builder.HasIndex(p => p.Gsm).IsUnique();
 
-            builder.HasData(new User { Id = 1, UserName = "Admin", Password = "qweasd", Gsm = "123123", Email = "admin@gmail.com",CreateDate=DateTime.Now });
+            builder.HasData(new User { Id = 1, UserName = "Admin", Password = "qweasd", Gsm = "123123", Email = "admin@gmail.com", CreateDate = DateTime.Now });
+
+
 
         }
     }

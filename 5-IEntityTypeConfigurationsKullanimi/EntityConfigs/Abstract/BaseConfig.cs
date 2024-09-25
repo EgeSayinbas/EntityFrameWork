@@ -1,5 +1,4 @@
-﻿using _5_IEntityTypeConfigurationsKullanimi.Entity.Abstract;
-using _5_IEntityTypeConfigurationsKullanimi.Entity.Concrete;
+﻿using _5_IEntityTypeConfigurationsKullanimi.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -14,9 +13,8 @@ namespace _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Abstract
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
-            builder.HasKey(x => x.Id);
-
+           builder.HasKey(x => x.Id);
+           
         }
-        
     }
 }

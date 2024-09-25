@@ -1,6 +1,5 @@
 ﻿using _6_ManyToMany.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -14,8 +13,7 @@ namespace _6_ManyToMany.EntityConfigs.Abstract
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
-            builder.HasKey(x => x.Id);
-
+            builder.HasKey(e => e.Id);
         }
     }
 }

@@ -19,16 +19,20 @@ namespace _6_ManyToMany.Contexts
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Kategori>();
-            //modelBuilder.Entity<Urun>();
-            //modelBuilder.Entity<Musteri>();
+            //modelBuilder.ApplyConfiguration(new KategoriConfig());
+            //modelBuilder.ApplyConfiguration(new MusteriConfig());
+            //modelBuilder.ApplyConfiguration(new UrunConfig());
 
-            //assembly icerisindeki butun IEntityTypeConfiguration dan inherit almis ne kadar
-            //class varsa icersisinde configure metodu calistirilir
+
+
+            //Bu çaliştigi assembly iceridindeki butun IEntityTypeConfiguration 'dan inherit almiş ne kadar
+            //class'varsa icerisindeki configure metodunu çaliştirir.
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            //Eger config dosyalari baska bir projede ise asagidaki gibi load edilebilir
-            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.LoadFrom("NorthwindEntities"));
+
+            //Eger Config dosyalari başka bir projede ise asağidaki gibi load edilebilir
+            // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.LoadFrom("NorthwindEntities"));
         }
     }
 }

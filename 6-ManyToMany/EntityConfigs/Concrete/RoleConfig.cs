@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace _6_ManyToMany.EntityConfigs.Concrete
 {
-    internal class RoleConfig : BaseConfig<Role>
+    public class RoleConfig:BaseConfig<Role>
     {
-        public virtual void Configure(EntityTypeBuilder<User> builder)
+        public override void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasKey(x => x.Id);
+            base.Configure(builder);
+            builder.Property(p => p.RolName).HasMaxLength(50);
 
+            builder.HasIndex(p => p.RolName).IsUnique();
         }
     }
 }

@@ -50,9 +50,13 @@ namespace _6_ManyToMany.Migrations
 
                     b.Property<string>("RolName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RolName")
+                        .IsUnique();
 
                     b.ToTable("Roller");
                 });

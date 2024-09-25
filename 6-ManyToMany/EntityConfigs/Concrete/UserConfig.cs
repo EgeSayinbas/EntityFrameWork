@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _6_ManyToMany.EntityConfigs.Concrete
 {
-    internal class UserConfig : BaseConfig<User>
+    public class UserConfig :BaseConfig<User>
     {
         public override void Configure(EntityTypeBuilder<User> builder)
         {
@@ -24,7 +24,6 @@ namespace _6_ManyToMany.EntityConfigs.Concrete
             builder.HasIndex(p => p.Gsm).IsUnique();
 
             //builder.HasData(new User { Id = 1, UserName = "Admin", Password = "qweasd", Gsm = "123123", Email = "admin@gmail.com", CreateDate = DateTime.Now });
-
         }
     }
 }

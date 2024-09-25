@@ -1,4 +1,4 @@
-﻿using _5_IEntityTypeConfigurationsKullanimi.Entity.Concrete;
+﻿using _5_IEntityTypeConfigurationsKullanimi.Entities.Concrete;
 using _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Abstract;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Concrete
 {
-    internal class MusteriConfig:BaseConfig<Musteri>
+    public class MusteriConfig:BaseConfig<Musteri>
     {
         public override void Configure(EntityTypeBuilder<Musteri> builder)
         {
@@ -20,6 +20,8 @@ namespace _5_IEntityTypeConfigurationsKullanimi.EntityConfigs.Concrete
             builder.Property(p => p.Gsm).HasMaxLength(15);
 
             builder.HasIndex(p => p.VergiNo).IsUnique();
+
+
         }
     }
 }

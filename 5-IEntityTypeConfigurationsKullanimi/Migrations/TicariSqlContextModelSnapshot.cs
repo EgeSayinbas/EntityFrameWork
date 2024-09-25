@@ -22,7 +22,7 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entity.Concrete.Kategori", b =>
+            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.Kategori", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,14 +38,14 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("KategoriAdi")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("KategoriAdi")
-                        .IsUnique()
-                        .HasFilter("[KategoriAdi] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Kategoriler");
 
@@ -53,41 +53,40 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                         new
                         {
                             Id = 1,
-                            Aciklama = "Elektronik",
-                            CreateDate = new DateTime(2024, 9, 23, 9, 29, 4, 990, DateTimeKind.Local).AddTicks(5541),
+                            CreateDate = new DateTime(2024, 9, 23, 9, 27, 48, 553, DateTimeKind.Local).AddTicks(9253),
                             KategoriAdi = "Elektronik"
                         },
                         new
                         {
                             Id = 2,
                             Aciklama = "Gida",
-                            CreateDate = new DateTime(2024, 9, 23, 9, 29, 4, 990, DateTimeKind.Local).AddTicks(5550),
+                            CreateDate = new DateTime(2024, 9, 23, 9, 27, 48, 553, DateTimeKind.Local).AddTicks(9265),
                             KategoriAdi = "Gida"
                         },
                         new
                         {
                             Id = 3,
                             Aciklama = "Tekstil",
-                            CreateDate = new DateTime(2024, 9, 23, 9, 29, 4, 990, DateTimeKind.Local).AddTicks(5552),
+                            CreateDate = new DateTime(2024, 9, 23, 9, 27, 48, 553, DateTimeKind.Local).AddTicks(9267),
                             KategoriAdi = "Tekstil"
                         },
                         new
                         {
                             Id = 4,
                             Aciklama = "Kitap",
-                            CreateDate = new DateTime(2024, 9, 23, 9, 29, 4, 990, DateTimeKind.Local).AddTicks(5553),
+                            CreateDate = new DateTime(2024, 9, 23, 9, 27, 48, 553, DateTimeKind.Local).AddTicks(9269),
                             KategoriAdi = "Kitap"
                         },
                         new
                         {
                             Id = 5,
                             Aciklama = "Hirdavat",
-                            CreateDate = new DateTime(2024, 9, 23, 9, 29, 4, 990, DateTimeKind.Local).AddTicks(5555),
+                            CreateDate = new DateTime(2024, 9, 23, 9, 27, 48, 553, DateTimeKind.Local).AddTicks(9270),
                             KategoriAdi = "Hirdavat"
                         });
                 });
 
-            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entity.Concrete.Musteri", b =>
+            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.Musteri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,6 +106,7 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("MusteriAdi")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -123,7 +123,7 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                     b.ToTable("Musteriler");
                 });
 
-            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entity.Concrete.Urun", b =>
+            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.Urun", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,10 +144,12 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UrunAdi")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UrunKodu")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -156,15 +158,70 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                     b.HasIndex("KategoriId");
 
                     b.HasIndex("UrunKodu")
-                        .IsUnique()
-                        .HasFilter("[UrunKodu] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Urunler");
                 });
 
-            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entity.Concrete.Urun", b =>
+            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.User", b =>
                 {
-                    b.HasOne("_5_IEntityTypeConfigurationsKullanimi.Entity.Concrete.Kategori", "Kategori")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Gsm")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex("Gsm")
+                        .IsUnique()
+                        .HasFilter("[Gsm] IS NOT NULL");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateDate = new DateTime(2024, 9, 23, 9, 27, 48, 554, DateTimeKind.Local).AddTicks(5377),
+                            Email = "admin@gmail.com",
+                            Gsm = "123123",
+                            Password = "qweasd",
+                            UserName = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.Urun", b =>
+                {
+                    b.HasOne("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.Kategori", "Kategori")
                         .WithMany("Urunler")
                         .HasForeignKey("KategoriId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -173,7 +230,7 @@ namespace _5_IEntityTypeConfigurationsKullanimi.Migrations
                     b.Navigation("Kategori");
                 });
 
-            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entity.Concrete.Kategori", b =>
+            modelBuilder.Entity("_5_IEntityTypeConfigurationsKullanimi.Entities.Concrete.Kategori", b =>
                 {
                     b.Navigation("Urunler");
                 });
