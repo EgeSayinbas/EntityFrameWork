@@ -94,12 +94,12 @@ namespace _9_EfCoreQuery
             #region ThenInclude
 
             #region Metod Syntax
-            //var siparisler = db.Orders.Include(p => p.OrderDetails)
-            //                                    .ThenInclude(p => p.Product)
-            //                              .Include(p => p.Customer)
-            //                              .Include(p => p.Employee)
-            //                              .Where(p => p.OrderDate.Value.Year == 1996 && p.OrderDate.Value.Month == 9)
-            //                              .ToList();
+            var siparislerMetod = db.Orders.Include(p => p.OrderDetails)
+                                                .ThenInclude(p => p.Product)
+                                          .Include(p => p.Customer)
+                                          .Include(p => p.Employee)
+                                          .Where(p => p.OrderDate.Value.Year == 1996 && p.OrderDate.Value.Month == 9)
+                                          .ToList();
 
             //decimal toplamtutar = 0;
             //foreach (var item in siparisler)
@@ -115,22 +115,41 @@ namespace _9_EfCoreQuery
             #endregion
             #region Query Syntax
 
-            //var siparisler = from o in db.Orders
-            //                 join od in db.OrderDetails.Include(p=>p.Product) on o.OrderId equals od.OrderId
-            //                 join p in db.Products on od.ProductId equals p.ProductId
-            //                 join e in db.Employees on o.EmployeeId equals e.EmployeeId
-            //                 join c in db.Customers on o.CustomerId equals c.CustomerId
-            //                 where o.OrderDate.Value.Year == 1996 && o.OrderDate.Value.Month == 9
-            //                 select new
-            //                 {
-            //                     OrderId = o.OrderId,
-            //                     CompanyName = c.CompanyName,
-            //                     Employee = e,
-            //                     OrderDate = o.OrderDate,
-            //                     OrderDetail = od,
-            //                     Customer = c
-            //                 };
+            //var siparisler = (from o in db.Orders
+            //                      //join od in db.OrderDetails.Include(p => p.Product) on o.OrderId equals od.OrderId
+            //                  join od in db.OrderDetails on o.OrderId equals od.OrderId
+            //                  join p in db.Products on od.ProductId equals p.ProductId
 
+            //                  join e in db.Employees on o.EmployeeId equals e.EmployeeId
+            //                  join c in db.Customers on o.CustomerId equals c.CustomerId
+            //                  where o.OrderDate.Value.Year == 1996 && o.OrderDate.Value.Month == 9
+            //                  select o
+            //                  ).ToList();
+
+            #region Yanlis yol. Ugrastirdi bizi.
+            //select new
+            //{
+            //    OrderId = o.OrderId,
+            //    //CompanyName = c.CompanyName,
+            //    Employee = e,
+            //    OrderDate = o.OrderDate,
+            //    //OrderDetail = od,
+            //    Customer = c
+            //}).ToList(); 
+            #endregion
+
+            //decimal toplamtutar = 0;
+            //foreach (var item in siparisler)
+            //{
+            //    Console.WriteLine(item.OrderId + " " + item.Customer.CompanyName + " " + item.Employee.FirstName + " " + item.Employee.LastName + " " + item.OrderDate.Value.ToShortDateString());
+            //    foreach (var detail in item.OrderDetails)
+            //    {
+            //        toplamtutar += detail.UnitPrice * detail.Quantity;
+            //        Console.WriteLine("\t\t" + detail.Product.ProductName + " " + detail.Quantity + " " + detail.UnitPrice.ToString("0.00 $"));
+            //    }
+            //    Console.WriteLine("\t\t" + " Siparis Toplami :" + toplamtutar);
+            //}
+            string str = "";
             //var siparisler = (from od in db.OrderDetails
             //                 join p in db.Products on od.ProductId equals p.ProductId
             //                 join o in db.Orders on od.OrderId equals o.OrderId
@@ -170,16 +189,16 @@ namespace _9_EfCoreQuery
 
             #region Metod Syntax 
 
-            var result = db.Customers.GroupBy(p => p.Country).Select(p=> new
-            {
-               name = p.Key,
-               adet=p.Count()
-            }).ToList();
+            //var result = db.Customers.GroupBy(p => p.Country).Select(p=> new
+            //{
+            //   name = p.Key,
+            //   adet=p.Count()
+            //}).ToList();
 
-            foreach (var item in result)
-            {
-                Console.WriteLine(item.name + " " + item.adet);
-            }
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item.name + " " + item.adet);
+            //}
 
             #endregion
             #region Query
@@ -199,8 +218,29 @@ namespace _9_EfCoreQuery
 
             #endregion
 
+
+            #region Dapper Tarzi Kullanim
+            //Console.WriteLine("Yil Giriniz:");
+            //var yil = int.Parse(Console.ReadLine());
+            //FormattableString sql = $@" select e.FirstName + ' '+ e.LastName Calisan,Round(sum(od.Quantity*od.UnitPrice*(1-Discount)),0) Ciro 
+            //                            from Employees e
+            //                            inner join orders o on e.EmployeeID = o.EmployeeID
+            //                            inner join [Order Details] od on od.OrderID=o.OrderID
+            //                            where DATEPART(year,o.OrderDate) = {yil} 
+            //                            group by  e.FirstName + ' '+ e.LastName 
+            //                            order by ciro desc ";
+            //var result = db.Database.SqlQuery<CalisanCiro>(sql).ToList();
+            //result.ForEach(x => Console.WriteLine(x.Calisan + "\t" + x.Ciro));
+            #endregion
+
             Console.WriteLine("Hello, World!");
         }
+
+    }
+    class CalisanCiro
+    {
+        public string Calisan { get; set; }
+        public double Ciro { get; set; }
     }
 }
 

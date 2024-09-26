@@ -15,13 +15,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-FluentApiKullanimi", "4-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-IEntityTypeConfigurationsKullanimi", "5-IEntityTypeConfigurationsKullanimi\5-IEntityTypeConfigurationsKullanimi.csproj", "{E76FF7D7-0699-4A96-8098-C21BB098A962}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-ManyToMany", "6-ManyToMany\6-ManyToMany.csproj", "{ABD2A603-E85C-4A0B-8EB7-CFDED9E9398C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6-ManyToMany", "6-ManyToMany\6-ManyToMany.csproj", "{ABD2A603-E85C-4A0B-8EB7-CFDED9E9398C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-Movies", "7-Movies\7-Movies.csproj", "{7ECE6C3E-D17E-47AE-A0E3-1F03C6DEED84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7-Movies", "7-Movies\7-Movies.csproj", "{7ECE6C3E-D17E-47AE-A0E3-1F03C6DEED84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-TablePerHierarchy", "8-TablePerHierarchy\8-TablePerHierarchy.csproj", "{866C4CCF-92FA-46DD-88D1-E4983CFF6F46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8-TablePerHierarchy", "8-TablePerHierarchy\8-TablePerHierarchy.csproj", "{866C4CCF-92FA-46DD-88D1-E4983CFF6F46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9-EfCoreQuery", "9-EfCoreQuery\9-EfCoreQuery.csproj", "{A1922444-6D6C-44E1-B096-6CE8CC369481}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "9-EfCoreQuery", "9-EfCoreQuery\9-EfCoreQuery.csproj", "{A1922444-6D6C-44E1-B096-6CE8CC369481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10-Global_Query_Filtering", "10-Global_Query_Filtering\10-Global_Query_Filtering.csproj", "{C2E6C203-3292-4FA1-BBB1-F0917A2C634E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11-GenericRepository", "11-GenericRepository\11-GenericRepository.csproj", "{3791B0D3-C704-4312-9489-4E1472891482}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericReposLib", "GenericReposLib\GenericReposLib.csproj", "{D40016D6-01CB-4443-AC8B-B70C3B46ACD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12-GenericLibKullanimi", "12-GenericLibKullanimi\12-GenericLibKullanimi.csproj", "{F4A99777-7495-4C3E-8891-60E28277EC27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +77,22 @@ Global
 		{A1922444-6D6C-44E1-B096-6CE8CC369481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1922444-6D6C-44E1-B096-6CE8CC369481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1922444-6D6C-44E1-B096-6CE8CC369481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2E6C203-3292-4FA1-BBB1-F0917A2C634E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E6C203-3292-4FA1-BBB1-F0917A2C634E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E6C203-3292-4FA1-BBB1-F0917A2C634E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E6C203-3292-4FA1-BBB1-F0917A2C634E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3791B0D3-C704-4312-9489-4E1472891482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3791B0D3-C704-4312-9489-4E1472891482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3791B0D3-C704-4312-9489-4E1472891482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3791B0D3-C704-4312-9489-4E1472891482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D40016D6-01CB-4443-AC8B-B70C3B46ACD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40016D6-01CB-4443-AC8B-B70C3B46ACD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40016D6-01CB-4443-AC8B-B70C3B46ACD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40016D6-01CB-4443-AC8B-B70C3B46ACD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A99777-7495-4C3E-8891-60E28277EC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A99777-7495-4C3E-8891-60E28277EC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A99777-7495-4C3E-8891-60E28277EC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A99777-7495-4C3E-8891-60E28277EC27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
